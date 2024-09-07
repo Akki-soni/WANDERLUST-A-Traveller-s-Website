@@ -1,0 +1,308 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="row mt-3">
+  <div class="col-8 offset-3">
+    <h3><%= listing.title %></h3>
+  </div>
+  <div class="card col-6 offset-3 show-card listing-card">
+    <img
+      src="<%= listing.image.url %>"
+      class="card-img-top show-img"
+      alt="listing_image"
+    />
+    <div class="card-body">
+      <p class="card-text">Owned By <i><%= listing.owner.username %></i></p>
+      <p class="card-text"><%= listing.description %></p>
+      <p class="card-text">
+        &#8377; <%= listing.price.toLocaleString("en-IN") %>
+      </p>
+      <p class="card-text"><%= listing.location %></p>
+      <p class="card-text"><%= listing.country %></p>
+    </div>
+  </div>
+
+  <br />
+
+  <% if(currUser && listing.owner._id.equals(currUser._id)) { %>
+  <div class="btns">
+    <a
+      href="/listings/<%= listing._id %>/edit"
+      class="btn btn-dark col-1 offset-3 edit-btn"
+      >Edit</a
+    >
+    <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
+      <button class="btn btn-dark offset-5">Delete</button>
+    </form>
+  </div>
+  <% } %>
+  <div class="col-8 offset-3 mb-3">
+    <% if(currUser) { %>
+    <hr />
+    <h4>Leave a Review</h4>
+    <form
+      action="/listings/<%= listing.id %>/reviews"
+      method="POST"
+      novalidate
+      class="needs-validation"
+    >
+      <div class="mb-3 mt-3">
+        <label for="rating" class="form-label">Rating</label>
+        <fieldset class="starability-slot">
+          <input
+            type="radio"
+            id="no-rate"
+            class="input-no-rate"
+            name="review[rating]"
+            value="1"
+            checked
+            aria-label="No rating."
+          />
+          <input
+            type="radio"
+            id="first-rate1"
+            name="review[rating]"
+            value="1"
+          />
+          <label for="first-rate1" title="Terrible">1 stars</label>
+          <input
+            type="radio"
+            id="first-rate2"
+            name="review[rating]"
+            value="2"
+          />
+          <label for="first-rate2" title="Not good">2 stars</label>
+          <input
+            type="radio"
+            id="first-rate3"
+            name="review[rating]"
+            value="3"
+          />
+          <label for="first-rate3" title="Average">3 stars</label>
+          <input
+            type="radio"
+            id="first-rate4"
+            name="review[rating]"
+            value="4"
+          />
+          <label for="first-rate4" title="Very good">4 stars</label>
+          <input
+            type="radio"
+            id="first-rate5"
+            name="review[rating]"
+            value="5"
+          />
+          <label for="first-rate5" title="Amazing">5 stars</label>
+        </fieldset>
+      </div>
+      <div class="mb-3 mt-3">
+        <label for="comment" class="form-label">Comments</label>
+        <textarea
+          name="review[comment]"
+          id="comment"
+          cols="30"
+          rows="5"
+          class="form-control"
+          required
+        ></textarea>
+        <div class="invalid-feedback">
+          Please Submit Some comment for review
+        </div>
+      </div>
+      <button class="btn btn-outline-dark">Submit</button>
+    </form>
+    <hr />
+    <% } %> <% if(listing.reviews.length > 0) { %>
+    <div class="row">
+      <p><b>All Reviews</b></p>
+      <% for(review of listing.reviews) { %>
+      <div class="card col-5 ms-3 mb-3">
+        <div class="card-body">
+          <h5 class="card-title">@<%= review.author.username %></h5>
+          <p
+            class="starability-result card-text"
+            data-rating="<%= review.rating %>"
+          ></p>
+          <p class="card-text"><%= review.comment %></p>
+
+          <form
+            class="mb-3"
+            method="POST"
+            action="/listings/<%= listing._id%>/reviews/<%= review._id %>?_method=DELETE"
+          >
+            <button class="btn btn-sm btn-dark">Delete</button>
+          </form>
+        </div>
+      </div>
+      <% } %>
+    </div>
+    <% } %>
+  </div>
+</div>
+
+<div class="col-8 offset-3 mb-3">
+  <hr />
+  <h3 class="show-head mb-3">
+    Where you'll be
+    <i class="fa-solid fa-location-crosshairs fa-xs" style="color: #ff0000"></i>
+  </h3>
+
+  <div class="directionsContainer">
+    <div id="directionsPanel"></div>
+    <div id="directionsItinerary"></div>
+  </div>
+
+  <div id="myMap" class="rounded"></div>
+</div>
+<script
+  type="text/javascript"
+  src="https://www.bing.com/api/maps/mapcontrol?callback=GetMap"
+></script>
+
+<script type="text/javascript">
+  const myStyle = {
+    elements: {
+      aerial: true,
+      settings: { landColor: "#D3EDDB" },
+      water: { fillColor: "#B3E6F4" },
+      waterPoint: { iconColor: "#5B9FAF" },
+      transportation: { strokeColor: "#ffffff" },
+      road: { fillColor: "#ffffff" },
+      railway: { strokeColor: "#85A8D5" },
+      structure: { fillColor: "#F8F4F1" },
+      runway: { fillColor: "#ff7fed" },
+      area: { fillColor: "#F0F2F4" },
+      political: {
+        borderStrokeColor: "#000000",
+        borderOutlineColor: "transparent",
+      },
+      point: {
+        iconColor: "#ffffff",
+        fillColor: "#000000",
+        strokeColor: "#ff0000",
+      },
+      transit: { fillColor: "transparent" },
+    },
+    version: "1.0",
+  };
+
+  async function GetMap() {
+    await Microsoft.Maps.loadModule("Microsoft.Maps.Search", () => {
+      const searchManager = new Microsoft.Maps.Search.SearchManager(map);
+
+      searchManager.geocode({
+        where: "<%= listing.location %>",
+        callback: (result) => {
+          if (result && result.results && result.results.length > 0) {
+            const location = result.results[0].location;
+            map.setView({ center: location, zoom: 14 });
+
+            // Custom icon URL for the pushpin
+            const customIconUrl =
+              "https://cdn-icons-png.flaticon.com/512/5193/5193714.png";
+
+            // Create a pushpin with a custom icon
+            const pushpin = new Microsoft.Maps.Pushpin(location, {
+              icon: customIconUrl,
+              iconSize: new Microsoft.Maps.Size(60, 60),
+            });
+
+            // Create an Infobox for the popup
+            const infobox = new Microsoft.Maps.Infobox(location, {
+              title: "<%= listing.title %>",
+              description: "Exact location will be provided after booking",
+              visible: false,
+              offset: new Microsoft.Maps.Point(0, 30),
+            });
+
+            Microsoft.Maps.Events.addHandler(pushpin, "click", () => {
+              infobox.setOptions({ visible: true });
+            });
+
+            map.entities.push(infobox);
+            map.entities.push(pushpin);
+          } else {
+            alert("Location not found");
+          }
+        },
+      });
+    });
+
+    var navigationBarMode = Microsoft.Maps.NavigationBarMode;
+    map = new Microsoft.Maps.Map("#myMap", {
+      credentials: "<%= process.env.MAP_TOKEN %>",
+      center: new Microsoft.Maps.Location(28.6139, 77.209), // Center the map at a specific location
+      zoom: 14, // Set the initial zoom level
+      customMapStyle: myStyle,
+      // showMapTypeSelector: false,
+      navigationBarMode: navigationBarMode.square,
+      supportedMapTypes: [
+        Microsoft.Maps.MapTypeId.road,
+        Microsoft.Maps.MapTypeId.aerial,
+      ],
+    });
+
+    Microsoft.Maps.loadModule("Microsoft.Maps.Directions", function () {
+      //Create an instance of the directions manager.
+      directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map);
+
+      //Specify where to display the route instructions.
+      directionsManager.setRenderOptions({
+        itineraryContainer: "#directionsItinerary",
+      });
+
+      //Specify the where to display the input panel
+      directionsManager.showInputPanel("directionsPanel");
+    });
+  }
+
+  // ----------------------------------------------------------------------------
+  // Delete Warning Popup
+
+  function del_popup() {
+    try {
+      // Event listener for delete button
+      document.querySelector(".del").addEventListener("click", () => {
+        // Disable elements
+        const disabledElements = document.querySelectorAll(".disabled-element");
+        for (const element of disabledElements) {
+          element.setAttribute("disabled", "true"); // Disable buttons
+          element.classList.add("disabled"); // Add a disabled class for styling
+        }
+
+        // Add opacity class to elements
+        const del_el = document.querySelectorAll(".del-opacity");
+        del_el.forEach((element) => {
+          element.classList.add("opacity_el");
+        });
+
+        // Show the delete confirmation popup
+        document.querySelector(".del_div").style.visibility = "visible";
+      });
+
+      // Event listener for cancel button in the popup
+      document.querySelector(".cancel").addEventListener("click", () => {
+        // Enable elements
+        const disabledElements = document.querySelectorAll(".disabled-element");
+        for (const element of disabledElements) {
+          element.removeAttribute("disabled"); // Enable buttons
+          element.classList.remove("disabled"); // Remove the disabled class
+        }
+
+        // Remove opacity class from elements
+        const del_el = document.querySelectorAll(".del-opacity");
+        del_el.forEach((element) => {
+          element.classList.remove("opacity_el");
+        });
+
+        // Hide the delete confirmation popup
+        document.querySelector(".del_div").style.visibility = "hidden";
+      });
+    } catch (err) {
+      // Handle errors
+    }
+  }
+
+  // Call the delete_popup function
+  del_popup();
+  // ----------------------------------------------------------------------------
+</script>
