@@ -92,7 +92,12 @@ app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
 
 app.all("*", (req, res, next) => {
-  next(new ExpressError(404, "Page Not Found!"));
+  next(
+    new ExpressError(
+      404,
+      "Hi Everyone, Welcome to Wanderlust!!,   I'm Akash the Creator of this Website, Please Click Explore , Icon or signup Yourself..."
+    )
+  );
 });
 
 app.use((err, req, res, next) => {
