@@ -3,9 +3,14 @@ const router = express.Router();
 const User = require("../models/user.js");
 const wrapAsync = require("../utils/wrapAsync.js");
 const passport = require("passport");
+const { sanitizeFilter } = require("mongoose");
 const { saveRedirectUrl } = require("../middleware.js");
 
 const userController = require("../controllers/users.js");
+
+router.get("/", (req, res) => {
+  res.redirect("/listings");
+});
 
 router
   .route("/signup")

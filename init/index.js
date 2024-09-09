@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV != "production") {
+  require("dotenv").config();
+}
+
 const mongoose = require("mongoose");
 const initData = require("./data.js");
 const Listing = require("../models/listing.js");
@@ -16,14 +20,43 @@ async function main() {
   await mongoose.connect(MONGO_URL);
 }
 
+let categoryAll = [
+  "Beachfront",
+  "Cabins",
+  "Omg",
+  "Lake",
+  "Design",
+  "Amazing Pools",
+  "Farms",
+  "Amazing Views",
+  "Rooms",
+  "Lakefront",
+  "Tiny Homes",
+  "Countryside",
+  "Treehouse",
+  "Trending",
+  "Tropical",
+  "National Parks",
+  "Casties",
+  "Camping",
+  "Top Of The World",
+  "Luxe",
+  "Iconic Cities",
+  "Earth Homes",
+];
+
 const initDB = async () => {
   await Listing.deleteMany({});
   initData.data = initData.data.map((obj) => ({
     ...obj,
     owner: "66d58b377453f1f5c1f69cbd",
+    price: obj.price * 25,
+    category: [
+      `${categoryAll[Math.floor(Math.random() * 22)]}`,
+      `${categoryAll[Math.floor(Math.random() * 22)]}`,
+    ],
   }));
   await Listing.insertMany(initData.data);
   console.log("data was initialized");
 };
-
 initDB();
