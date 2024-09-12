@@ -4,7 +4,7 @@
 
 It is a Website created by me(Akash Chandra Verma). So Basically It is a Traveller's Website, where traveller's find the suitable room to rest, because it was headaque to find suitable places or rooms to rest. So, I created this Website... So Basically this Website is a trailer and movie will be coming soon...😉
 
-##### Table of Contents #####
+## Table of Contents ##
 
 -   [Project Overview](#project-overview)
 -   [Technologies Used](#technologies-used)
@@ -17,68 +17,68 @@ It is a Website created by me(Akash Chandra Verma). So Basically It is a Travell
 -   [Project Link](#project-link)
 -   [Thank You](#thank-you)
 
-##### Project Overview #####
+## Project Overview ##
 
 I'm thrilled to share my latest Full Stack Web Development project, WanderLust! It’s a dynamic and user-friendly platform designed to help travellers explore, share and review their travel experiences. Whether you’re discovering new destinations or revisiting favourite places, WanderLust makes it easier than ever to find inspiration through interactive maps and user-generated content.
 
-##### Technologies Used #####
+## Technologies Used ##
 
-### Frontend
+#### Frontend ####
 
 -    **HTML**: A User Interface Structured Layout.
 -    **CSS**: A Excellent Styling With the help of CSS.
 -    **JavaScript**: A Logic Building Material.
 
-### Backend
+#### Backend ####
 
 -   **Express.js**: Web application framework for Node.js, providing robust features for web and mobile applications.
 -   **Node.js**: JavaScript runtime for server-side development.
 
-### DataBase
+#### DataBase ####
 
 -   **MongoDB**: NoSQL database for flexible and scalable data storage.
 
-##### Packages Used #####
+## Packages Used ##
 
-### Authentication
+#### Authentication ####
 
 -   **Passport.js**: Middleware for user authentication, supporting various strategies.
 -   **Dotenv**: Environment variable management for secure configuration.
 
-### Image Storage
+#### Image Storage ####
 
 -   **Cloudinary**: Seamless image storage and management.
 
-### Maps
+#### Maps ####
 
 -   **Microsoft Azure Bing Map**: Creating interactive maps for travellers.
 
-### Frontend
+#### Frontend ####
 
 -   **MVC Architecture**: For structured code organization.
 -   **Bootstrap**: For responsive and clean design.
 -   **EJS**: Dynamic template rendering.
 
-### Session Management
+#### Session Management ####
 
 -   **Connect Flash**: For user-friendly notifications.
 -   **Connect Mongo**: MongoDB session store for Express.js.
 -   **Express Session**: Ensuring secure session handling.
 -   **Cookie Parser**: Middleware for parsing cookies.
 
-### Validation
+#### Validation ####
 
 -   **Joi**: For validating data with ease.
 
-### Object Modeling
+#### Object Modeling ####
 
 -   **Mongoose**: Simplified MongoDB data modeling.
 
-### File Uploads
+#### File Uploads ####
 
 -   **Multer**: Efficient handling of file uploads.
 
-### Social Authentication
+#### Social Authentication ####
 
 -   **Passport.js**: Providing robust user authentication.
 -   **Passport Local**: Providing Local authentication strategy.
@@ -86,7 +86,7 @@ I'm thrilled to share my latest Full Stack Web Development project, WanderLust! 
 -   **Passport Google OAuth20**: Google OAuth2.0 authentication strategy.
 -   **Passport Local Mongoose**: Mongoose-specific authentication strategy.
 
-##### Key Features #####
+## Key Features ##
 
 -   **User Authentication:** Secure login, logout, and profile management. 
 -   **CRUD Operations:** Easily add, edit, and delete listings. 
@@ -98,7 +98,7 @@ I'm thrilled to share my latest Full Stack Web Development project, WanderLust! 
 -   **Login with Facebook:** Easily log in using your Facebook credentials
 -   **Login with Email:** Traditional email login for user convenience
 
-##### How to Install #####
+## How to Install ##
 
 Follow these steps to set up and run the project locally:
 
@@ -163,24 +163,24 @@ Follow these steps to set up and run the project locally:
 
     Open `http://localhost:8080/listings` in your web browser.
 
-##### Challenges & Solutions #####
+## Challenges & Solutions ##
 
 Encountered challenges, especially with data handling and maping, but implemented efficient solutions. Overcame scalability issues with a well-architectured backend.
 
-##### Special Thanks #####
+## Special Thanks ##
 
 This project has been an incredible learning journey for me, and I couldn’t have achieved it without the invaluable guidance and inspiration from Shradha Khapra di :) Your mentorship and support have truly been instrumental in my growth. Thank you for being such a powerful source of motivation!
 
-##### Author #####
+## Author ##
 
 Akash Chandra Verma \
 LinkedIn : https://www.linkedin.com/in/akashchandraverma/
 
-##### Project link #####
+## Project link ##
 https://wanderlust-a-traveller-s-website.onrender.com/  ---->>  A Link to Website where you can creates and uploads listingd..
 WanderLust is hosted on a free platform, so loading may take a moment, but it's fully functional and ready for you to explore!
 
-##### Thank You #####
+## Thank You ##
 
 Thank you for exploring Wanderlust! I’d love to hear your perspectives and any feedback you have regarding WanderLust! 😊
 
