@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <p align="center">
   <b style="color: blue;  ">Visitor count</b>
   <br>
@@ -14,8 +13,6 @@
                                      This is a Full-Stack Web Application 🚀
 
 It is a Website created by me(Akash Chandra Verma). So Basically It is a Traveller's Website, where traveller's find the suitable room to rest, because it was headaque to find suitable places or rooms to rest. So, I created this Website... So Basically this Website is a trailer and movie will be coming soon...😉
-=======
->>>>>>> 9bb7cc377dfe6dcd858af8a99e2e54fdbbf11c97
 
 ## Table of Contents
 
@@ -215,6 +212,4 @@ This project has been an incredible learning journey for me, and I couldn’t ha
 
 ## Thank You
 
-Thank you for exploring Wanderlust! I’d love to hear your perspectives and any feedback you have regarding WanderLust! 😊
-
----
+Thank you for exploring Wanderlust! I’d love to hear your perspectives and any feedback you have
