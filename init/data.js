@@ -359,7 +359,7 @@ const sampleListings = [
       filename: "listingimage",
       url: "https://c4.wallpaperflare.com/wallpaper/567/248/1015/skyline-photography-light-trails-los-angeles-wallpaper-preview.jpg",
     },
-    price: 21000,
+    price: 2100,
     location: "California",
     country: "United State",
     // geometry: {
