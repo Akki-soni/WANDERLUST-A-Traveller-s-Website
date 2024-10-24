@@ -177,7 +177,9 @@ Follow these steps to set up and run the project locally:
 
 ![Website Screenshot](/WanderLust.png)
 
-## 🔗 Live Demo (https://wanderlust-a-traveller-s-website.onrender.com/)
+## 🔗 Live Demo
+
+[View Live Demo](https://wanderlust-a-traveller-s-website.onrender.com/)
 
 A Link to Website where you can creates and uploads listingd..
 WanderLust is hosted on a free platform, so loading may take a moment, but it's fully functional and ready for you to explore!
